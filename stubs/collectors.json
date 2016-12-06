@@ -1,0 +1,166 @@
+{
+    "collectors": [
+        {
+            "id": 100111448,
+            "name": "Academy",
+            "description": "BBC Academy service layer and main web site (COSMOS):\n\nContactEmail: academy-development-owner@lists.forge.bbc.co.uk",
+            "timeZone": "Etc/UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100111448/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100196146,
+            "name": "Amigo",
+            "description": "Amigo is a Journalism tool used to create draft story assets in the CPS CMS",
+            "timeZone": "Europe/London",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100196146/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100103423,
+            "name": "AMP",
+            "timeZone": "Etc/UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100103423/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100141455,
+            "name": "AWS-SES-EJBCA-RDS_Collector",
+            "timeZone": "UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100141455/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100470748,
+            "name": "BBC WW Collector",
+            "timeZone": "Etc/UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100470748/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100163943,
+            "name": "BBC-Monitoring",
+            "description": "ContactEmail: bbcm-portal-team@lists.forge.bbc.co.uk",
+            "timeZone": "Europe/London",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100163943/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100107341,
+            "name": "BBCiD-v5",
+            "description": "BBC idv5 Collector",
+            "timeZone": "Etc/UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100107341/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100086523,
+            "name": "BBCThree",
+            "description": "ContactEmail: ben.hartley.ext@bbc.co.uk",
+            "timeZone": "Europe/London",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100086523/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        },
+        {
+            "id": 100561113,
+            "name": "BDA-test",
+            "description": "Burhan Deniz Abdi test server",
+            "timeZone": "Etc/UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100561113/sources"
+                }
+            ],
+            "ephemeral": false,
+            "targetCpu": -1,
+            "sourceSyncMode": "UI",
+            "collectorType": "Installable",
+            "collectorVersion": "19.170-24",
+            "osVersion": "3.13.0-57-generic",
+            "osName": "Linux",
+            "osArch": "amd64",
+            "lastSeenAlive": 1481055952454,
+            "alive": true
+        },
+        {
+            "id": 100337516,
+            "name": "broadcast-dataplayout-wez-test-juniper-srx_Collector",
+            "timeZone": "UTC",
+            "links": [
+                {
+                    "rel": "sources",
+                    "href": "/v1/collectors/100337516/sources"
+                }
+            ],
+            "collectorType": "Hosted",
+            "collectorVersion": "",
+            "lastSeenAlive": 1481056181814,
+            "alive": true
+        }
+    ]
+}

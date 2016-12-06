@@ -1,0 +1,18 @@
+{
+    "collector": {
+        "id": 100111448,
+        "name": "Academy",
+        "description": "BBC Academy",
+        "timeZone": "Etc/UTC",
+        "links": [
+            {
+                "rel": "sources",
+                "href": "/v1/collectors/100111448/sources"
+            }
+        ],
+        "collectorType": "Hosted",
+        "collectorVersion": "",
+        "lastSeenAlive": 1481056181814,
+        "alive": true
+    }
+}
