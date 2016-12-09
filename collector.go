@@ -6,8 +6,9 @@ import (
 )
 
 const (
-	collectorsURL = "/collectors?limit=:limit&offset=:offset"
-	collectorURL  = "/collectors/:id"
+	collectorsURL   = "/collectors?limit=:limit&offset=:offset"
+	collectorURL    = "/collectors/:id"
+	newCollectorURL = "/collectors/"
 )
 
 // Collector is a representation of a Sumo Logic log collector
@@ -57,4 +58,27 @@ func (s *Sumologic) Collector(id int) (*Collector, error) {
 	}
 
 	return collectorWrapper.Collector, err
+}
+
+// DeleteCollector deletes a collector and returns an error if the deletion was not
+// successful
+func (s *Sumologic) DeleteCollector(id int) error {
+	url := s.ResourceURL(collectorURL, map[string]string{":id": strconv.Itoa(id)})
+
+	_, err := s.execRequest("DELETE", url, nil)
+
+	return err
+}
+
+// CreateCollector creates a new Sumo Logic collector
+func (s *Sumologic) CreateCollector(newCollector Collector) error {
+	url := s.ResourceURL(newCollectorURL, nil)
+
+	collectorBody, err := json.Marshal(newCollector)
+
+	if err == nil {
+		_, err = s.execRequest("POST", url, collectorBody)
+	}
+
+	return err
 }

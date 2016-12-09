@@ -37,3 +37,27 @@ func TestCollector(t *testing.T) {
 	assert.Equal(t, true, collector.Alive)
 	assert.Equal(t, "Hosted", collector.CollectorType)
 }
+
+func TestDeleteCollector(t *testing.T) {
+	_, sumoClient := Stub("stubs/nil-response.json")
+
+	err := sumoClient.DeleteCollector(1234)
+
+	if err != nil {
+		t.Fatalf("Failed to delete collector: %s", err)
+	}
+}
+
+func TestCreateCollector(t *testing.T) {
+	_, sumoClient := Stub("stubs/nil-response.json")
+
+	newCollector := Collector{
+		ID: 1234,
+	}
+
+	err := sumoClient.CreateCollector(newCollector)
+
+	if err != nil {
+		t.Fatalf("Failed to create collector: %s", err)
+	}
+}
