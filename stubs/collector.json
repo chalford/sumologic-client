@@ -1,8 +1,8 @@
 {
     "collector": {
-        "id": 100111448,
-        "name": "Academy",
-        "description": "BBC Academy service layer and main web site (COSMOS):\n\nContactEmail: academy-development-owner@lists.forge.bbc.co.uk",
+        "id": 100111111,
+        "name": "Test Collector",
+        "description": "A Test Collector description",
         "timeZone": "Etc/UTC",
         "links": [
             {

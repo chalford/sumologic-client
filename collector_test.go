@@ -64,14 +64,52 @@ func TestCollector(t *testing.T) {
 		t.Fatalf("Failed to retrieve collector: %s", err)
 	}
 
-	assert.Equal(t, 100111448, collector.ID)
-	assert.Equal(t, "Academy", collector.Name)
-	assert.Equal(t, "BBC Academy service layer and main web site (COSMOS):\n\nContactEmail: academy-development-owner@lists.forge.bbc.co.uk", collector.Description)
+	if *integration {
+		assert.Equal(t, 100111448, collector.ID)
+		assert.Equal(t, "Academy", collector.Name)
+		assert.Equal(t, "BBC Academy service layer and main web site (COSMOS):\n\nContactEmail: academy-development-owner@lists.forge.bbc.co.uk", collector.Description)
+	} else {
+		assert.Equal(t, 100111111, collector.ID)
+		assert.Equal(t, "Test Collector", collector.Name)
+		assert.Equal(t, "A Test Collector description", collector.Description)
+	}
 	assert.Equal(t, true, collector.Alive)
 	assert.Equal(t, "Hosted", collector.CollectorType)
+
 }
 
-func TestCreateCollector(t *testing.T) {
+func TestCreateDeleteCollector(t *testing.T) {
+	createdCollector := createCollector(t)
+	deleteCollector(t, createdCollector.ID)
+}
+
+func createCollector(t *testing.T) *Collector {
+	var sumoClient *Sumologic
+	if *integration {
+		sumoClient = liveSumoClient
+	} else {
+		_, sumoClient = Stub("stubs/collector.json")
+	}
+
+	newCollector := Collector{
+		CollectorType: "Hosted",
+		Name:          "Test Collector",
+		Description:   "A Test Collector description",
+		Category:      "HTTP Collection",
+	}
+
+	createdCollector, err := sumoClient.CreateCollector(newCollector)
+
+	if err != nil || createdCollector == nil {
+		t.Fatalf("Failed to create collector: %s", err)
+	}
+
+	assert.Equal(t, newCollector.Name, createdCollector.Name)
+
+	return createdCollector
+}
+
+func deleteCollector(t *testing.T, id int) {
 	var sumoClient *Sumologic
 	if *integration {
 		sumoClient = liveSumoClient
@@ -79,21 +117,7 @@ func TestCreateCollector(t *testing.T) {
 		_, sumoClient = Stub("stubs/nil-response.json")
 	}
 
-	newCollector := Collector{
-		ID: 1234,
-	}
-
-	err := sumoClient.CreateCollector(newCollector)
-
-	if err != nil {
-		t.Fatalf("Failed to create collector: %s", err)
-	}
-}
-
-func TestDeleteCollector(t *testing.T) {
-	_, sumoClient := Stub("stubs/nil-response.json")
-
-	err := sumoClient.DeleteCollector(1234)
+	err := sumoClient.DeleteCollector(id)
 
 	if err != nil {
 		t.Fatalf("Failed to delete collector: %s", err)
