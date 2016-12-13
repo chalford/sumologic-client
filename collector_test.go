@@ -50,7 +50,7 @@ func TestCollectors(t *testing.T) {
 
 }
 
-func TestCollector(t *testing.T) {
+func getCollector(t *testing.T, id int) {
 	var sumoClient *Sumologic
 	if *integration {
 		sumoClient = liveSumoClient
@@ -58,28 +58,28 @@ func TestCollector(t *testing.T) {
 		_, sumoClient = Stub("stubs/collector.json")
 	}
 
-	collector, err := sumoClient.Collector(100111448)
+	collector, err := sumoClient.Collector(id)
 
 	if err != nil {
 		t.Fatalf("Failed to retrieve collector: %s", err)
 	}
 
 	if *integration {
-		assert.Equal(t, 100111448, collector.ID)
-		assert.Equal(t, "Academy", collector.Name)
-		assert.Equal(t, "BBC Academy service layer and main web site (COSMOS):\n\nContactEmail: academy-development-owner@lists.forge.bbc.co.uk", collector.Description)
+		assert.NotNil(t, collector.Name)
+		assert.NotNil(t, collector.Description)
 	} else {
-		assert.Equal(t, 100111111, collector.ID)
 		assert.Equal(t, "Test Collector", collector.Name)
 		assert.Equal(t, "A Test Collector description", collector.Description)
 	}
+	assert.Equal(t, id, collector.ID)
 	assert.Equal(t, true, collector.Alive)
 	assert.Equal(t, "Hosted", collector.CollectorType)
 
 }
 
-func TestCreateDeleteCollector(t *testing.T) {
+func TestCreateGetDeleteCollector(t *testing.T) {
 	createdCollector := createCollector(t)
+	getCollector(t, createdCollector.ID)
 	deleteCollector(t, createdCollector.ID)
 }
 
