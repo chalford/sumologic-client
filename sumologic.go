@@ -2,9 +2,11 @@ package sumologic
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -42,6 +44,20 @@ func NewSumologic(accessID, accessKey, baseURL, apiPath string) *Sumologic {
 		AccessKey: accessKey,
 		Client:    client,
 	}
+}
+
+// NewDefaultSumologic returns a new Sumologic client, using credentials set in environment variables
+func NewDefaultSumologic() (*Sumologic, error) {
+	envAccessID := os.Getenv("SUMOLOGIC_ACCESS_ID")
+	envAccessKey := os.Getenv("SUMOLOGIC_ACCESS_KEY")
+
+	if envAccessID == "" || envAccessKey == "" {
+		return nil, errors.New("SUMOLOGIC_ACCESS_ID or SUMOLOGIC_ACCESS_KEY environment variables not set")
+	}
+
+	client := NewSumologic(envAccessID, envAccessKey, "", "")
+
+	return client, nil
 }
 
 // ResourceURL returns a URL with parameters substituted
