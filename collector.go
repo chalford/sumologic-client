@@ -13,7 +13,7 @@ const (
 
 // Collector is a representation of a Sumo Logic log collector
 type Collector struct {
-	ID               int                 `json:"id"`
+	ID               int                 `json:"id,omitempty"`
 	Name             string              `json:"name,omitempty"`
 	CollectorType    string              `json:"collectorType,omitempty"`
 	LastSeenAlive    int                 `json:"lastSeenAlive,omitempty"`
@@ -60,25 +60,35 @@ func (s *Sumologic) Collector(id int) (*Collector, error) {
 	return collectorWrapper.Collector, err
 }
 
+// CreateCollector creates a new Sumo Logic collector
+func (s *Sumologic) CreateCollector(newCollector Collector) (*Collector, error) {
+	url := s.ResourceURL(newCollectorURL, nil)
+
+	var collectorWrapper struct {
+		Collector *Collector `json:"collector"`
+	}
+	collectorWrapper.Collector = &newCollector
+
+	collectorBody, err := json.Marshal(collectorWrapper)
+
+	var contents []byte
+
+	if err == nil {
+		contents, err = s.execRequest("POST", url, collectorBody)
+		if err == nil {
+			err = json.Unmarshal(contents, &collectorWrapper)
+		}
+	}
+
+	return collectorWrapper.Collector, err
+}
+
 // DeleteCollector deletes a collector and returns an error if the deletion was not
 // successful
 func (s *Sumologic) DeleteCollector(id int) error {
 	url := s.ResourceURL(collectorURL, map[string]string{":id": strconv.Itoa(id)})
 
 	_, err := s.execRequest("DELETE", url, nil)
-
-	return err
-}
-
-// CreateCollector creates a new Sumo Logic collector
-func (s *Sumologic) CreateCollector(newCollector Collector) error {
-	url := s.ResourceURL(newCollectorURL, nil)
-
-	collectorBody, err := json.Marshal(newCollector)
-
-	if err == nil {
-		_, err = s.execRequest("POST", url, collectorBody)
-	}
 
 	return err
 }
