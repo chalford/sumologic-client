@@ -1,0 +1,13 @@
+language: go
+
+go:
+  - 1.7.x
+
+before_install:
+  - sudo add-apt-repository ppa:masterminds/glide
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq -y glide
+
+install: glide install
+
+script: go test -v

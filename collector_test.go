@@ -16,11 +16,11 @@ var (
 
 func TestMain(m *testing.M) {
 	flag.Parse()
+	var err error
 	if *integration {
 		fmt.Println("Running integration tests")
+		liveSumoClient, err = NewDefaultSumologic()
 	}
-	var err error
-	liveSumoClient, err = NewDefaultSumologic()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
